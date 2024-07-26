@@ -1,5 +1,9 @@
 pipeline {
   agent any
+
+  tools {
+    gradle 'Gradle-8.9'
+  }
   stages{
     stage("build"){
       steps{
@@ -17,6 +21,9 @@ pipeline {
     stage("deploy"){
       steps{
         echo 'deploying the application'
+        withGradle(){
+          sh './gradlew -v'
+        }
       }
     }
   }
